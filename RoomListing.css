@@ -1,0 +1,37 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.buttons{
+    padding-left:400px;
+}
+
+#btncheckin,#btncheckout,#btncancel{
+   border:solid;
+   padding-left:25px;
+   padding-right:30px;
+   
+}
+
+table.table {
+    font-style:italic;
+    background-color:beige;
+    table-layout:auto;
+    border:solid 1px;
+    align-items:center;
+}
+
+table th,td{
+    border:solid 1px;
+    text-align:center;
+}
+
+table tr:nth-child(even){
+    background-color:chartreuse
+}
+
+#btndiv{
+    border:solid;
+    
+}

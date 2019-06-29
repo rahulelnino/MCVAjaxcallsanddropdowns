@@ -1,0 +1,70 @@
+﻿@model IEnumerable<mvcalligator.Models.RoomModel>
+
+@{
+    ViewBag.Title = "RoomListing";
+    WebGrid obj = new WebGrid(source: Model,canSort:false);
+}
+
+<h2>RoomListing</h2>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@*<script src="~/Scripts/Hotel.js"></script>*@
+<script src="~/Scripts/Room.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/RoomListing.css" rel="stylesheet" />
+
+@obj.GetHtml();
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Roomno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Roomtype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.guestname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.checkindate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isVacant)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Roomno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Roomtype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.guestname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.checkindate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isVacant)
+        </td>
+        
+    </tr>
+}
+
+</table>
+
+<div id="buttondiv" class="buttons align-content-md-center">
+    <input type="button" id="btncheckin" value="CheckIn" />
+    <input type="button" id="btncheckout" value="CheckOut" />
+    <input type="button" id="btncancel" value="Cancel" />
+    
+</div>

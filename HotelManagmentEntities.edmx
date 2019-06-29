@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HotelManagmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChckIns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomNo" Type="int" />
+          <Property Name="GuestName" Type="varchar" MaxLength="20" />
+          <Property Name="CheckinDate" Type="varchar" MaxLength="50" />
+          <Property Name="PurposeOfVisit" Type="varchar" MaxLength="50" />
+          <Property Name="Deposit" Type="int" />
+          <Property Name="RoomRent" Type="int" />
+        </EntityType>
+        <EntityType Name="ChckOuts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomNo" Type="int" />
+          <Property Name="CheckinDate" Type="varchar" MaxLength="50" />
+          <Property Name="Deposit" Type="int" />
+          <Property Name="Refund" Type="int" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="RoomNo" />
+          </Key>
+          <Property Name="RoomNo" Type="int" Nullable="false" />
+          <Property Name="RoomType" Type="varchar" MaxLength="20" />
+          <Property Name="RoomRent" Type="int" />
+          <Property Name="IsVacant" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__ChckIns__RoomNo__73BA3083">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
+          <End Role="ChckIns" Type="Self.ChckIns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomNo" />
+            </Principal>
+            <Dependent Role="ChckIns">
+              <PropertyRef Name="RoomNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChckOuts__RoomNo__787EE5A0">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
+          <End Role="ChckOuts" Type="Self.ChckOuts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomNo" />
+            </Principal>
+            <Dependent Role="ChckOuts">
+              <PropertyRef Name="RoomNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spInsertData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoomNo" Type="int" Mode="In" />
+          <Parameter Name="GuestName" Type="varchar" Mode="In" />
+          <Parameter Name="CheckinDate" Type="varchar" Mode="In" />
+          <Parameter Name="PurposeOfVisit" Type="varchar" Mode="In" />
+          <Parameter Name="Deposit" Type="int" Mode="In" />
+          <Parameter Name="RoomRent" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="HotelManagmentModelStoreContainer">
+          <EntitySet Name="ChckIns" EntityType="Self.ChckIns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChckOuts" EntityType="Self.ChckOuts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ChckIns__RoomNo__73BA3083" Association="Self.FK__ChckIns__RoomNo__73BA3083">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="ChckIns" EntitySet="ChckIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChckOuts__RoomNo__787EE5A0" Association="Self.FK__ChckOuts__RoomNo__787EE5A0">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="ChckOuts" EntitySet="ChckOuts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelManagmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChckIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomNo" Type="Int32" />
+          <Property Name="GuestName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CheckinDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PurposeOfVisit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deposit" Type="Int32" />
+          <Property Name="RoomRent" Type="Int32" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__ChckIns__RoomNo__73BA3083" FromRole="ChckIns" ToRole="Rooms" />
+        </EntityType>
+        <EntityType Name="ChckOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomNo" Type="Int32" />
+          <Property Name="CheckinDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deposit" Type="Int32" />
+          <Property Name="Refund" Type="Int32" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__ChckOuts__RoomNo__787EE5A0" FromRole="ChckOuts" ToRole="Rooms" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomNo" />
+          </Key>
+          <Property Name="RoomNo" Type="Int32" Nullable="false" />
+          <Property Name="RoomType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoomRent" Type="Int32" />
+          <Property Name="IsVacant" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChckIns" Relationship="Self.FK__ChckIns__RoomNo__73BA3083" FromRole="Rooms" ToRole="ChckIns" />
+          <NavigationProperty Name="ChckOuts" Relationship="Self.FK__ChckOuts__RoomNo__787EE5A0" FromRole="Rooms" ToRole="ChckOuts" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__ChckIns__RoomNo__73BA3083">
+          <End Role="Rooms" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="ChckIns" Type="Self.ChckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomNo" />
+            </Principal>
+            <Dependent Role="ChckIns">
+              <PropertyRef Name="RoomNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChckOuts__RoomNo__787EE5A0">
+          <End Role="Rooms" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="ChckOuts" Type="Self.ChckOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomNo" />
+            </Principal>
+            <Dependent Role="ChckOuts">
+              <PropertyRef Name="RoomNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelManagmentEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChckIns" EntityType="Self.ChckIn" />
+          <EntitySet Name="ChckOuts" EntityType="Self.ChckOut" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__ChckIns__RoomNo__73BA3083" Association="Self.FK__ChckIns__RoomNo__73BA3083">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="ChckIns" EntitySet="ChckIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChckOuts__RoomNo__787EE5A0" Association="Self.FK__ChckOuts__RoomNo__787EE5A0">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="ChckOuts" EntitySet="ChckOuts" />
+          </AssociationSet>
+          <FunctionImport Name="spInsertData">
+            <Parameter Name="RoomNo" Mode="In" Type="Int32" />
+            <Parameter Name="GuestName" Mode="In" Type="String" />
+            <Parameter Name="CheckinDate" Mode="In" Type="String" />
+            <Parameter Name="PurposeOfVisit" Mode="In" Type="String" />
+            <Parameter Name="Deposit" Mode="In" Type="Int32" />
+            <Parameter Name="RoomRent" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelManagmentModelStoreContainer" CdmEntityContainer="HotelManagmentEntities1">
+          <EntitySetMapping Name="ChckIns">
+            <EntityTypeMapping TypeName="HotelManagmentModel.ChckIn">
+              <MappingFragment StoreEntitySet="ChckIns">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoomNo" ColumnName="RoomNo" />
+                <ScalarProperty Name="GuestName" ColumnName="GuestName" />
+                <ScalarProperty Name="CheckinDate" ColumnName="CheckinDate" />
+                <ScalarProperty Name="PurposeOfVisit" ColumnName="PurposeOfVisit" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="RoomRent" ColumnName="RoomRent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChckOuts">
+            <EntityTypeMapping TypeName="HotelManagmentModel.ChckOut">
+              <MappingFragment StoreEntitySet="ChckOuts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoomNo" ColumnName="RoomNo" />
+                <ScalarProperty Name="CheckinDate" ColumnName="CheckinDate" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="Refund" ColumnName="Refund" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="HotelManagmentModel.Room">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="RoomNo" ColumnName="RoomNo" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+                <ScalarProperty Name="RoomRent" ColumnName="RoomRent" />
+                <ScalarProperty Name="IsVacant" ColumnName="IsVacant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HotelManagmentModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spInsertData" FunctionName="HotelManagmentModel.Store.spInsertData" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

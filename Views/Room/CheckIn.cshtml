@@ -1,0 +1,125 @@
+﻿@model mvcalligator.Models.CheckInViewModel
+
+@{
+    ViewBag.Title = "CheckIn";
+}
+
+<center><h2>CheckIn</h2></center>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.RoomNos, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(model => model.RoomNos, (IEnumerable<SelectListItem>)ViewBag.Roomnos)
+                    @Html.ValidationMessageFor(model => model.RoomNos, "", new { @class = "text-danger" })
+                </div>
+
+
+                @Html.LabelFor(model => model.RoomType, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.RoomType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RoomType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+            
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.GuestName, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.GuestName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GuestName, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                </div>
+               </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="row">
+
+                    @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.CheckInDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.CheckOutDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.CheckOutDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CheckOutDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="row">
+
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" },cols="18",rows="4" })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Purpose, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="row">
+
+                    @Html.LabelFor(model => model.Deposit, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Deposit, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Deposit, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Rent, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Rent, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Rent, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            
+
+            <div class="form-group">
+                <div  class="col-md-offset-2 col-md-10">
+                    <input id="btndiv" type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<link href="~/Content/RoomListing.css" rel="stylesheet" />
+<script src="~/Scripts/checkIn.js"></script>
